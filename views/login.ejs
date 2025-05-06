@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log Masuk</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Log Masuk</h1>
+    <% if (messages.error) { %>
+        <p class="error"><%= messages.error %></p>
+    <% } %>
+    <% if (messages.success) { %>
+        <p class="success"><%= messages.success %></p>
+    <% } %>
+    <form action="/login" method="POST">
+        <label>ID:</label><br>
+        <input type="text" name="id" required><br>
+        <label>Kata Sandi:</label><br>
+        <input type="password" name="password" required><br>
+        <button type="submit">Log Masuk</button>
+    </form>
+    <p>Belum ada akaun? <a href="/register">Daftar</a></p>
+</body>
+</html>

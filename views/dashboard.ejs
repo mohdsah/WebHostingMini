@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Dashboard - <%= user.id %></h1>
+    <% if (messages.error) { %>
+        <p class="error"><%= messages.error %></p>
+    <% } %>
+    <% if (messages.success) { %>
+        <p class="success"><%= messages.success %></p>
+    <% } %>
+    <h2>Simpan Kod HTML Baru</h2>
+    <form action="/save" method="POST">
+        <textarea name="html" rows="10" cols="50" placeholder="Masukkan kod HTML"></textarea><br>
+        <button type="submit">Simpan</button>
+    </form>
+    <h2>Kod HTML Anda</h2>
+    <% if (user.htmls && user.htmls.length > 0) { %>
+        <ul>
+            <% user.htmls.forEach(filename => { %>
+                <li>
+                    <a href="/view/<%= filename %>"><%= filename %></a> |
+                    <a href="/edit/<%= filename %>">Edit</a> |
+                    <form action="/delete" method="POST" style="display:inline;">
+                        <input type="hidden" name="filename" value="<%= filename %>">
+                        <button type="submit" onclick="return confirm('Adakah anda pasti ingin memadam?')">Padam</button>
+                    </form>
+                </li>
+            <% }) %>
+        </ul>
+    <% } else { %>
+        <p>Tiada kod HTML disimpan.</p>
+    <% } %>
+    <p><a href="/logout">Log Keluar</a></p>
+</body>
+</html>

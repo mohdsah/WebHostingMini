@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit HTML - <%= filename %></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Edit HTML - <%= filename %></h1>
+    <% if (messages.error) { %>
+        <p class="error"><%= messages.error %></p>
+    <% } %>
+    <% if (messages.success) { %>
+        <p class="success"><%= messages.success %></p>
+    <% } %>
+    <form action="/edit/<%= filename %>" method="POST">
+        <textarea name="html" rows="20" cols="50"><%= htmlContent %></textarea><br>
+        <button type="submit">Simpan Perubahan</button>
+    </form>
+    <p><a href="/dashboard">Kembali ke Dashboard</a></p>
+</body>
+</html>

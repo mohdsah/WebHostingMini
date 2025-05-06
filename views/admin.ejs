@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Admin</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Panel Admin</h1>
+    <% if (messages.error) { %>
+        <p class="error"><%= messages.error %></p>
+    <% } %>
+    <% if (messages.success) { %>
+        <p class="success"><%= messages.success %></p>
+    <% } %>
+    <h2>Tambah Pengguna Baru</h2>
+    <form action="/admin/add" method="POST">
+        <label>ID:</label><br>
+        <input type="text" name="id" required><br>
+        <label>Kata Sandi:</label><br>
+        <input type="password" name="password" required><br>
+        <button type="submit">Tambah</button>
+    </form>
+    <h2>Senarai Pengguna</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Tarikh Luput</th>
+            <th>Tindakan</th>
+        </tr>
+        <% users.forEach(user => { %>
+            <tr>
+                <td><%= user.id %></td>
+                <td><%= new Date(user.expiredAt).toLocaleDateString() %></td>
+                <td>
+                    <form action="/admin/renew" method="POST" style="display:inline;">
+                        <input type="hidden" name="id" value="<%= user.id %>">
+                        <button type="submit">Perbaharui</button>
+                    </form>
+                    <form action="/admin/delete" method="POST" style="display:inline;">
+                        <input type="hidden" name="id" value="<%= user.id %>">
+                        <button type="submit" onclick="return confirm('Adakah anda pasti ingin memadam?')">Padam</button>
+                    </form>
+                </td>
+            </tr>
+        <% }) %>
+    </table>
+    <p><a href="/logout">Log Keluar</a></p>
+</body>
+</html>

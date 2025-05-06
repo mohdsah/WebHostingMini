@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beranda</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Selamat Datang</h1>
+    <% if (messages.error) { %>
+        <p class="error"><%= messages.error %></p>
+    <% } %>
+    <% if (messages.success) { %>
+        <p class="success"><%= messages.success %></p>
+    <% } %>
+    <% if (user) { %>
+        <p>Halo, <%= user.id %>! 
+            <% if (user.isAdmin) { %>
+                <a href="/admin">Panel Admin</a> | 
+            <% } else { %>
+                <a href="/dashboard">Dashboard</a> | 
+            <% } %>
+            <a href="/logout">Log Keluar</a>
+        </p>
+    <% } else { %>
+        <p><a href="/register">Daftar</a> | <a href="/login">Log Masuk</a></p>
+    <% } %>
+</body>
+</html>
