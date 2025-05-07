@@ -1,41 +1,69 @@
 <!DOCTYPE html>
-<html lang="ms">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="/css/style.css">
+  <meta charset="UTF-8">
+  <title>Dashboard Pengguna</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <h1>Dashboard - <%= user.id %></h1>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" href="/">MyHTMLApp</a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="/logout">Log Keluar</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-4">
+    <h3>Selamat datang, <%= user.id %>!</h3>
+
     <% if (messages.error) { %>
-        <p class="error"><%= messages.error %></p>
+      <div class="alert alert-danger"><%= messages.error %></div>
     <% } %>
     <% if (messages.success) { %>
-        <p class="success"><%= messages.success %></p>
+      <div class="alert alert-success"><%= messages.success %></div>
     <% } %>
-    <h2>Simpan Kod HTML Baru</h2>
-    <form action="/save" method="POST">
-        <textarea name="html" rows="10" cols="50" placeholder="Masukkan kod HTML"></textarea><br>
-        <button type="submit">Simpan</button>
-    </form>
-    <h2>Kod HTML Anda</h2>
-    <% if (user.htmls && user.htmls.length > 0) { %>
-        <ul>
-            <% user.htmls.forEach(filename => { %>
-                <li>
-                    <a href="/view/<%= filename %>"><%= filename %></a> |
-                    <a href="/edit/<%= filename %>">Edit</a> |
-                    <form action="/delete" method="POST" style="display:inline;">
-                        <input type="hidden" name="filename" value="<%= filename %>">
-                        <button type="submit" onclick="return confirm('Adakah anda pasti ingin memadam?')">Padam</button>
-                    </form>
-                </li>
-            <% }) %>
+
+    <div class="card mt-3">
+      <div class="card-header bg-info text-white">
+        Simpan HTML Baru
+      </div>
+      <div class="card-body">
+        <form method="POST" action="/save">
+          <div class="mb-3">
+            <textarea name="html" class="form-control" rows="6" placeholder="Tampal kod HTML anda di sini..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Simpan HTML</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <h5>Senarai HTML Anda:</h5>
+      <% if (user.htmls && user.htmls.length > 0) { %>
+        <ul class="list-group">
+          <% user.htmls.forEach(file => { %>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <a href="/view/<%= file %>" target="_blank"><%= file %></a>
+              <div>
+                <a href="/edit/<%= file %>" class="btn btn-sm btn-warning me-2">Edit</a>
+                <form method="POST" action="/delete" class="d-inline">
+                  <input type="hidden" name="filename" value="<%= file %>">
+                  <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Padam fail ini?')">Padam</button>
+                </form>
+              </div>
+            </li>
+          <% }) %>
         </ul>
-    <% } else { %>
-        <p>Tiada kod HTML disimpan.</p>
-    <% } %>
-    <p><a href="/logout">Log Keluar</a></p>
+      <% } else { %>
+        <p class="text-muted">Tiada fail HTML disimpan.</p>
+      <% } %>
+    </div>
+  </div>
 </body>
 </html>
