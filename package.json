@@ -1,20 +1,27 @@
 {
-    "name": "my-app",
-    "version": "1.0.0",
-    "main": "index.js",
-    "scripts": {
-        "start": "node server.js"
-    },
-    "engines": {
-        "node": ">=18.x"
-    },
-    "dependencies": {
-        "bcrypt": "^5.1.1",
-        "connect-flash": "^0.1.1",
-        "dotenv": "^16.5.0",
-        "ejs": "^3.1.10",
-        "express": "^5.1.0",
-        "express-session": "^1.18.1",
-        "uuid": "^11.1.0"
-    }
+  "name": "html-dashboard-app",
+  "version": "1.0.0",
+  "description": "A web app for users to paste HTML code, view it, and manage it",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "connect-flash": "^0.1.1",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "fs": "0.0.1-security",
+    "node-uuid": "^1.4.8",
+    "dotenv": "^16.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "author": "Klick4You",
+  "license": "ISC"
 }
